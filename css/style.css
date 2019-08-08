@@ -43,3 +43,11 @@ p{
 #gifNumber, #gifSearchBar{
     margin-left:20px;
 }
+.topicTitle{
+    font-weight: bold;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-bottom: 1px;
+    
+    
+}

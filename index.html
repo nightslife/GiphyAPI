@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/style.css">
+        <title>GIF Search</title>
     </head>
     <body>
         <div id="buttons">
@@ -10,7 +11,7 @@
         </div>
         <form id="options">
             <div id="gifNumber">
-                <label>Number of GIFs to search</label> 
+                <label class="topicTitle">Number of GIFs to search</label> 
                 
                 <div>
                     <input type="radio" value="5" name="number">
@@ -26,7 +27,7 @@
                 </div>
             </div>
             <div id="gifSearchBar">
-                <label for="addGif">Add a new topic to the search list above:</label>
+                <label for="addGif" class="topicTitle">Add a new topic to the search list above:</label>
                 <input type="text" id="newGifText">
                 <input class="buttons" id="submitGif" type="submit" value="Submit">
             </div>
@@ -34,8 +35,7 @@
                 <button id="animateGifs">Animate all GIFs</button>
                 <button id="pauseGifs">Pause all GIFs</button>
                 <button id="clearGifs">Clear all GIFs</button>
-            </div>
-            
+            </div>    
         </form>
         <div id="gifDisplay">
         </div>
