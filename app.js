@@ -3,7 +3,7 @@ $(document).ready(function(){
 const API = "EuZ2mmvjRpW0JqghC9nl179pqJrC4SAX";
 
 //Search Array
-var gifArray = ["dog", "cat", "bird", "parrot", "horse", "iguana"];
+var gifArray = ["dog", "cat", "spongebob", "power rangers", "dragons", "angry","tired","YOLO","tacos","explosions"];
 
 //Function to display buttons
 function buttonDisplay(){
@@ -11,6 +11,7 @@ function buttonDisplay(){
     for (i of gifArray){
         let button = $("<button>")
         button.text(i)
+        button.attr("value",i)
         button.addClass("search")
         $("#buttons").append(button)
     }
@@ -18,10 +19,9 @@ function buttonDisplay(){
 //AJAX search and display function
 function gifSearch(){
     $("#gifDisplay").empty();
-    let searchTerms = $(this).text()
+    let searchTerms = $(this).val()
     let searchLimit = $("#gifNumber").find('input:checked').attr('value')
     let URL = "https://api.giphy.com/v1/gifs/search?api_key="+API+"&q="+searchTerms+"&limit="+searchLimit;
-    console.log(URL)
     $.ajax({
         url: URL,
         method: "GET"
@@ -29,7 +29,7 @@ function gifSearch(){
         for(n of response.data){
             let newGifDiv = $("<div>")
             newGifDiv.addClass("block")
-            let pTag = $("<p>").text("Rated: "+ n.rating)
+            let pTag = $("<p>").text("Rated: "+ n.rating.toUpperCase())
             let newImage = $("<img>");
             newImage.attr({
                 "src": n.images.fixed_height_still.url,
@@ -61,9 +61,14 @@ function animateGif(gif){
 $("#submitGif").on("click",function(event){
     event.preventDefault();
     let newGif = $("#newGifText").val().trim()
-    if(gifArray.indexOf(newGif) <0 && newGif !== "")
+    if(gifArray.indexOf(newGif) <0 && newGif !== ""){
         gifArray.push(newGif)
-    buttonDisplay()
+        buttonDisplay()
+        $("[value="+newGif+"]").click()
+    }
+    $("#newGifText").val("")
+    
+    
 })
 
 //Pauses all gifs when clicked

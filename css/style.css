@@ -9,6 +9,7 @@ button{
     background-color: rgb(3, 95, 65);
     text-align: center;
     border-radius: 15px;
+    padding: 3px 12px;
 
 }
 #gifDisplay{
@@ -30,8 +31,15 @@ button{
 form{
     font-size: 18px;
     line-height: 27px;
-    margin-left: 20px;
 }
 #gifButtons{
-    margin-top:18px;
+    margin-top:10px;
+}
+p{
+    font-size: 24px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+}
+#gifNumber, #gifSearchBar{
+    margin-left:20px;
 }
