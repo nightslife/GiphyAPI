@@ -25,7 +25,18 @@ function gifSearch(){
     }).then(function(response){
         console.log(response)
         for(n of response.data){
-            console.log(n.url)
+            let newGifDiv = $("<div>")
+            newGifDiv.addClass("block")
+            let pTag = $("<p>").text("Rated: "+ n.rating)
+            let newAnimalImage = $("<img>");
+            newAnimalImage.attr("src", n.images.fixed_height_still.url)
+            newAnimalImage.attr("data-still", n.images.fixed_height_still.url)
+            newAnimalImage.attr("data-motion", n.images.fixed_height.url)
+            newAnimalImage.attr("data-state", "still")
+            newAnimalImage.addClass("gifClick")
+            newGifDiv.append(pTag)
+            newGifDiv.append(newAnimalImage)
+            $("#gifDisplay").prepend(newGifDiv)
         }
     })
 }
