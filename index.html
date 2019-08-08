@@ -10,7 +10,7 @@
         </div>
         <form id="options">
             <div id="gifNumber">
-                <label>Number of Gifs</label> 
+                <label>Number of GIFs to search</label> 
                 
                 <div>
                     <input type="radio" value="5" name="number">
@@ -22,17 +22,20 @@
                 </div>
             </div>
             <div>
-                <label for="addAnimal">Add an animal to search bar</label>
+                <label for="addGif">Add a new GIF to the search list above</label>
             </div>
             <div>
-                <input type="text" id="animalText">
-                <input class="buttons" id="submitAnimal" type="submit" value="Submit">
+                <input type="text" id="newGifText">
+                <input class="buttons" id="submitGif" type="submit" value="Submit">
+            </div>
+            <div id="gifButtons">
+                <button id="animateGifs">Animate all GIFs</button>
+                <button id="pauseGifs">Pause all GIFs</button>
+                <button id="clearGifs">Clear all GIFs</button>
             </div>
             
         </form>
         <div id="gifDisplay">
-            
-
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="app.js"></script>

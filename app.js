@@ -1,58 +1,106 @@
 $(document).ready(function(){
-
+// API Key
 const API = "EuZ2mmvjRpW0JqghC9nl179pqJrC4SAX";
 
-var giphArray = ["dog", "cat", "bird", "parrot", "horse", "iguana"];
+//Search Array
+var gifArray = ["dog", "cat", "bird", "parrot", "horse", "iguana"];
 
+//Function to display buttons
 function buttonDisplay(){
     $("#buttons").empty();
-    for (i of giphArray){
-        var button = $("<button>")
+    for (i of gifArray){
+        let button = $("<button>")
         button.text(i)
         button.addClass("search")
         $("#buttons").append(button)
     }
 }
+//AJAX search and display function
 function gifSearch(){
     $("#gifDisplay").empty();
-    var searchTerms = $(this).text()
-    var searchLimit = $("#gifNumber").find('input:checked').attr('value')
-    var URL = "https://api.giphy.com/v1/gifs/search?api_key="+API+"&q="+searchTerms+"&limit="+searchLimit;
+    let searchTerms = $(this).text()
+    let searchLimit = $("#gifNumber").find('input:checked').attr('value')
+    let URL = "https://api.giphy.com/v1/gifs/search?api_key="+API+"&q="+searchTerms+"&limit="+searchLimit;
     console.log(URL)
     $.ajax({
         url: URL,
         method: "GET"
     }).then(function(response){
-        console.log(response)
         for(n of response.data){
             let newGifDiv = $("<div>")
             newGifDiv.addClass("block")
             let pTag = $("<p>").text("Rated: "+ n.rating)
-            let newAnimalImage = $("<img>");
-            newAnimalImage.attr("src", n.images.fixed_height_still.url)
-            newAnimalImage.attr("data-still", n.images.fixed_height_still.url)
-            newAnimalImage.attr("data-motion", n.images.fixed_height.url)
-            newAnimalImage.attr("data-state", "still")
-            newAnimalImage.addClass("gifClick")
+            let newImage = $("<img>");
+            newImage.attr({
+                "src": n.images.fixed_height_still.url,
+                "data-still": n.images.fixed_height_still.url,
+                "data-motion": n.images.fixed_height.url,
+                "data-state": "still"
+            })
+            newImage.addClass("gifClick")
             newGifDiv.append(pTag)
-            newGifDiv.append(newAnimalImage)
+            newGifDiv.append(newImage)
             $("#gifDisplay").prepend(newGifDiv)
         }
     })
 }
 
-$("#submitAnimal").on("click",function(event){
+//Set gif to still state and image function
+function stillGif(gif){
+    $(gif).attr("src", $(gif).attr("data-still"))
+    $(gif).attr("data-state","still")
+}
+//Set gif to animated state function
+function animateGif(gif){
+    $(gif).attr("src", $(gif).attr("data-motion"))
+    $(gif).attr("data-state","inMotion")
+}
+
+
+//Adds new search term button to other array
+$("#submitGif").on("click",function(event){
     event.preventDefault();
-    let newAnimal = $("#animalText").val().trim()
-    if(giphArray.indexOf(newAnimal) <0 && newAnimal !== "")
-        giphArray.push(newAnimal)
+    let newGif = $("#newGifText").val().trim()
+    if(gifArray.indexOf(newGif) <0 && newGif !== "")
+        gifArray.push(newGif)
     buttonDisplay()
 })
 
+//Pauses all gifs when clicked
+$("#pauseGifs").on("click",function(event){
+    event.preventDefault();
+    for(allGif of $(".gifClick")){
+        stillGif(allGif)
+    }
+})
 
+//Animates all gifs when clicked
+$("#animateGifs").on("click",function(event){
+    event.preventDefault();
+    for(allGif of $(".gifClick")){
+        animateGif(allGif)
+    }
+})
 
+//Clears all gifs when clicked
+$("#clearGifs").on("click",function(event){
+    event.preventDefault();
+    $("#gifDisplay").empty();
+})
+
+//Initial button display
 buttonDisplay()
 
+//Run AJAX search based on button clicked
 $(document).on("click",".search", gifSearch)
+
+//Animates or Stills gif based on current state when clicked
+$(document).on("click",".gifClick", function(){
+    if($(this).attr("data-state") === "still"){
+        animateGif(this)
+    }else {
+        stillGif(this)
+    }
+})
 
 })

@@ -14,3 +14,24 @@ button{
 #gifDisplay{
     width: 85%;
 }
+#animateGifs{
+    color: rgb(0, 26, 0);
+    background-color: rgb(161, 255, 255);
+}
+#pauseGifs{
+    color: red;
+    background-color: black;
+}
+#clearGifs{
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+form{
+    font-size: 18px;
+    line-height: 27px;
+    margin-left: 20px;
+}
+#gifButtons{
+    margin-top:18px;
+}
