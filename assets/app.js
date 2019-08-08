@@ -11,7 +11,6 @@ function buttonDisplay(){
     for (i of gifArray){
         let button = $("<button>")
         button.text(i)
-        button.attr("value",i)
         button.addClass("search")
         $("#buttons").append(button)
     }
@@ -19,7 +18,7 @@ function buttonDisplay(){
 //AJAX search and display function
 function gifSearch(){
     $("#gifDisplay").empty();
-    let searchTerms = $(this).val()
+    let searchTerms = $(this).text()
     let searchLimit = $("#gifNumber").find('input:checked').attr('value')
     let URL = "https://api.giphy.com/v1/gifs/search?api_key="+API+"&q="+searchTerms+"&limit="+searchLimit;
     $.ajax({
@@ -64,11 +63,9 @@ $("#submitGif").on("click",function(event){
     if(gifArray.indexOf(newGif) <0 && newGif !== ""){
         gifArray.push(newGif)
         buttonDisplay()
-        $("[value="+newGif+"]").click()
+        $("button:contains("+newGif+")").click()
     }
     $("#newGifText").val("")
-    
-    
 })
 
 //Pauses all gifs when clicked
